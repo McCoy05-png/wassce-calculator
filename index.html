@@ -1,50 +1,241 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>WASSCE Grade Calculator</title>
-  <style>
-    body { font-family: Arial, sans-serif; padding: 20px; background: #f4f4f9; max-width: 450px; margin: auto; }
-    h1 { text-align: center; color: #333; font-size: 22px; }
-    p { text-align: center; color: #666; font-size: 14px; }
-    h3 { margin-top: 20px; color: #007bff; border-bottom: 1px solid #ccc; padding-bottom: 5px; }
-    .subject { display: flex; justify-content: space-between; margin-bottom: 12px; align-items: center; }
-    label { font-weight: bold; font-size: 15px; }
-    select { padding: 6px; font-size: 15px; border-radius: 4px; border: 1px solid #ccc; }
-    button { width: 100%; padding: 12px; background: #28a745; color: white; border: none; font-size: 18px; border-radius: 6px; cursor: pointer; margin-top: 20px; font-weight: bold; }
-    #result { margin-top: 20px; text-align: center; font-size: 22px; font-weight: bold; color: #007bff; }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ghana Exams Aggregate Calculator (WASSCE & BECE)</title>
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --accent-color: #27ae60;
+            --bg-color: #f4f6f7;
+            --card-bg: #ffffff;
+            --text-color: #333333;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 500px;
+            margin: 0 auto;
+            background: var(--card-bg);
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        h1 {
+            text-align: center;
+            font-size: 1.4rem;
+            color: var(--primary-color);
+            margin-bottom: 5px;
+        }
+        .subtitle {
+            text-align: center;
+            font-size: 0.9rem;
+            color: #7f8c8d;
+            margin-bottom: 20px;
+        }
+        .tabs {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+            gap: 10px;
+        }
+        .tab-btn {
+            flex: 1;
+            padding: 10px;
+            border: none;
+            background: #e0e0e0;
+            cursor: pointer;
+            font-weight: bold;
+            border-radius: 6px;
+            transition: 0.3s;
+        }
+        .tab-btn.active {
+            background: var(--accent-color);
+            color: white;
+        }
+        .calculator-section {
+            display: none;
+        }
+        .calculator-section.active {
+            display: block;
+        }
+        .subject-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+        .subject-row label {
+            font-size: 0.9rem;
+            font-weight: 500;
+            flex: 1;
+        }
+        .subject-row select {
+            flex: 1;
+            padding: 8px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        .calc-btn {
+            width: 100%;
+            padding: 12px;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 15px;
+        }
+        .calc-btn:hover {
+            background-color: #1a252f;
+        }
+        .result-box {
+            margin-top: 20px;
+            padding: 15px;
+            background: #e8f8f5;
+            border-left: 5px solid var(--accent-color);
+            border-radius: 4px;
+            text-align: center;
+            font-size: 1.1rem;
+            font-weight: bold;
+        }
+        .momo-section {
+            margin-top: 30px;
+            padding-top: 15px;
+            border-top: 1px solid #eee;
+            text-align: center;
+            font-size: 0.85rem;
+            color: #555;
+        }
+    </style>
 </head>
 <body>
 
-  <h1>WASSCE Aggregate Calculator</h1>
-  <p>Select your grades to compute your total score:</p>
+<div class="container">
+    <h1>Ghana Exams Calculator</h1>
+    <div class="subtitle">Calculate your WASSCE & BECE Aggregates instantly</div>
 
-  <h3>Core Subjects</h3>
-  <div class="subject"><label>English Language</label><select class="grade"><option value="1">A1</option><option value="2">B2</option><option value="3">B3</option><option value="4">C4</option><option value="5">C5</option><option value="6">C6</option><option value="7">D7</option><option value="8">E8</option><option value="9">F9</option></select></div>
-  <div class="subject"><label>Core Mathematics</label><select class="grade"><option value="1">A1</option><option value="2">B2</option><option value="3">B3</option><option value="4">C4</option><option value="5">C5</option><option value="6">C6</option><option value="7">D7</option><option value="8">E8</option><option value="9">F9</option></select></div>
-  <div class="subject"><label>Integrated Science</label><select class="grade"><option value="1">A1</option><option value="2">B2</option><option value="3">B3</option><option value="4">C4</option><option value="5">C5</option><option value="6">C6</option><option value="7">D7</option><option value="8">E8</option><option value="9">F9</option></select></div>
-  <div class="subject"><label>Social Studies</label><select class="grade"><option value="1">A1</option><option value="2">B2</option><option value="3">B3</option><option value="4">C4</option><option value="5">C5</option><option value="6">C6</option><option value="7">D7</option><option value="8">E8</option><option value="9">F9</option></select></div>
+    <div class="tabs">
+        <button class="tab-btn active" onclick="switchTab('wassce')">WASSCE</button>
+        <button class="tab-btn tab" onclick="switchTab('bece')">BECE</button>
+    </div>
 
-  <h3>Best 3 Electives</h3>
-  <div class="subject"><label>Elective 1</label><select class="grade"><option value="1">A1</option><option value="2">B2</option><option value="3">B3</option><option value="4">C4</option><option value="5">C5</option><option value="6">C6</option><option value="7">D7</option><option value="8">E8</option><option value="9">F9</option></select></div>
-  <div class="subject"><label>Elective 2</label><select class="grade"><option value="1">A1</option><option value="2">B2</option><option value="3">B3</option><option value="4">C4</option><option value="5">C5</option><option value="6">C6</option><option value="7">D7</option><option value="8">E8</option><option value="9">F9</option></select></div>
-  <div class="subject"><label>Elective 3</label><select class="grade"><option value="1">A1</option><option value="2">B2</option><option value="3">B3</option><option value="4">C4</option><option value="5">C5</option><option value="6">C6</option><option value="7">D7</option><option value="8">E8</option><option value="9">F9</option></select></div>
+    <div id="wassce-section" class="calculator-section active">
+        <h3>WASSCE Grade Calculator</h3>
+        <div id="wassce-inputs"></div>
+        <button class="calc-btn" onclick="calculateWassce()">Calculate WASSCE Aggregate</button>
+        <div id="wassce-result" class="result-box" style="display:none;"></div>
+    </div>
 
-  <button onclick="calculateAggregate()">Calculate Aggregate</button>
-  <div id="result"></div>
+    <div id="bece-section" class="calculator-section">
+        <h3>BECE Grade Calculator</h3>
+        <div id="bece-inputs"></div>
+        <button class="calc-btn" onclick="calculateBece()">Calculate BECE Aggregate</button>
+        <div id="bece-result" class="result-box" style="display:none;"></div>
+    </div>
 
-  <script>
-    function calculateAggregate() {
-      const grades = document.querySelectorAll('.grade');
-      let total = 0;
-      grades.forEach(g => total += parseInt(g.value));
-      document.getElementById('result').innerText = 'Total Aggregate: ' + total;
+    <div class="momo-section">
+        <p>Support the Developer! Liked this tool? Send a token via Momo:</p>
+        <strong>Momo: 055XXXXXXXX (Name: McCoy)</strong>
+    </div>
+</div>
+
+<script>
+    function switchTab(tab) {
+        document.getElementById('wassce-section').classList.remove('active');
+        document.getElementById('bece-section').classList.remove('active');
+        const buttons = document.querySelectorAll('.tab-btn');
+        buttons.forEach(btn => btn.classList.remove('active'));
+
+        if(tab === 'wassce') {
+            document.getElementById('wassce-section').classList.add('active');
+            buttons[0].classList.add('active');
+        } else {
+            document.getElementById('bece-section').classList.add('active');
+            buttons[1].classList.add('active');
+        }
     }
-  </script>
+
+    const wassceSubjects = ["Core Mathematics", "English Language", "Integrated Science", "Social Studies", "Elective 1", "Elective 2", "Elective 3", "Elective 4"];
+    const wassceGrades = { "A1": 1, "B2": 2, "B3": 3, "C4": 4, "C5": 5, "C6": 6, "D7": 7, "E8": 8, "F9": 9 };
+
+    const wassceContainer = document.getElementById('wassce-inputs');
+    wassceSubjects.forEach((sub, index) => {
+        let options = '<option value="">Select Grade</option>';
+        for (let grade in wassceGrades) {
+            options += `<option value="${wassceGrades[grade]}">${grade}</option>`;
+        }
+        wassceContainer.innerHTML += `
+            <div class="subject-row">
+                <label>${sub}</label>
+                <select id="w-sub-${index}">${options}</select>
+            </div>`;
+    });
+
+    const beceSubjects = ["English Language", "Mathematics", "Integrated Science", "Social Studies", "RME", "ICT", "B.D.T / Pre-Tech", "Creative Arts", "Ghanaian Language"];
+    const beceGrades = { "Grade 1 (1)": 1, "Grade 2 (2)": 2, "Grade 3 (3)": 3, "Grade 4 (4)": 4, "Grade 5 (5)": 5, "Grade 6 (6)": 6, "Grade 7 (7)": 7, "Grade 8 (8)": 8, "Grade 9 (9)": 9 };
+
+    const beceContainer = document.getElementById('bece-inputs');
+    beceSubjects.forEach((sub, index) => {
+        let options = '<option value="">Select Grade</option>';
+        for (let text in beceGrades) {
+            options += `<option value="${beceGrades[text]}">${text}</option>`;
+        }
+        beceContainer.innerHTML += `
+            <div class="subject-row">
+                <label>${sub}</label>
+                <select id="b-sub-${index}">${options}</select>
+            </div>`;
+    });
+
+    function calculateWassce() {
+        let scores = [];
+        for (let i = 0; i < wassceSubjects.length; i++) {
+            let val = document.getElementById(`w-sub-${i}`).value;
+            if (val !== "") scores.push(parseInt(val));
+        }
+        if (scores.length < 6) {
+            alert("Please select grades for at least 6 subjects.");
+            return;
+        }
+        scores.sort((a, b) => a - b);
+        let best6 = scores.slice(0, 6);
+        let total = best6.reduce((a, b) => a + b, 0);
+
+        let resBox = document.getElementById('wassce-result');
+        resBox.style.display = 'block';
+        resBox.innerHTML = `Your Best 6 WASSCE Aggregate is: ${total}`;
+    }
+
+    function calculateBece() {
+        let scores = [];
+        for (let i = 0; i < beceSubjects.length; i++) {
+            let val = document.getElementById(`b-sub-${i}`).value;
+            if (val !== "") scores.push(parseInt(val));
+        }
+        if (scores.length < 6) {
+            alert("Please select grades for at least 6 subjects for BECE calculation.");
+            return;
+        }
+        scores.sort((a, b) => a - b);
+        let best6 = scores.slice(0, 6);
+        let total = best6.reduce((a, b) => a + b, 0);
+
+        let resBox = document.getElementById('bece-result');
+        resBox.style.display = 'block';
+        resBox.innerHTML = `Your Best 6 BECE Aggregate is: ${total}`;
+    }
+</script>
+
 <script type='text/javascript' src='//pl30754787.effectiveratecpm.com/2b/96/34/2b963459c3cb04f9812aefbc6c071d7c.js'></script>
 
 </body>
 </html>
-  
